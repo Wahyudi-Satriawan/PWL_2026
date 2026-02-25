@@ -1,10 +1,28 @@
 <?php
 
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/hello', function () {
-    return 'Hello World';
-});
+use App\Http\Controllers\PageController;
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+
+use App\Http\Controllers\PhotoController;
+
+Route::resource('photos', PhotoController::class);
+
+Route::get('/', HomeController::class);
+Route::get('/about', AboutController::class);
+Route::get('/articles/{id}', ArticleController::class);
+
+
+Route::get('/', [PageController::class, 'index']);
+Route::get('/about', [PageController::class, 'about']);
+Route::get('/articles/{id}', [PageController::class, 'articles']);
+
+Route::get('/hello', [WelcomeController::class, 'hello']);
 
 Route::get('/world', function () {
     return 'World';
